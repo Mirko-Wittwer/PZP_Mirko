@@ -24,27 +24,49 @@ public class Main {
         //                  2. Teil: Grenze (Möglich sind hier allle Operatoren <, <=, >, >=; ==, !=)
         //                  3. Teil: Anweisung nach einem Durchlauf
 
-        for (int i = 0; i < 10; i++) {
-            System.out.print(i + " ");
+        /*  - gefüllt ja oder nein
+        - das Symbol auswählen können
+        - rahmenbreite wählen können
+        */
 
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Geben Sie mit der Anzahl der Symbole die Laenge ein: ");
+        int laenge = sc.nextInt();
+
+        System.out.println("Also die Laenge lautet " + laenge + " Symbole. Gebe Sie die Breite ein: ");
+        int breite = sc.nextInt();
+        System.out.println("Also die Breite lautet " + breite + " Symbole. Soll die Figur gefüllt sein? Ja oder Nein?");
+        String gefüllt = sc.next();
+
+
+        if (gefüllt.equals("ja")) {
+            System.out.println("Figur wird gefüllt.");
+
+        } else {
+            System.out.println("Figur wird nicht gefüllt.");
         }
-        System.out.println();
-        for (int i = 20; i >= 1; i--){
 
-            System.out.print(i + " ");
-        }
+        System.out.println("Mit welchem Symbol soll die Figur erstellt werden?");
+        String symbol = sc.next();
+        System.out.println("Ok, die Figur wird mit folgendem Symbol erstellt: " + symbol);
 
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            for(int j = 1; j <= 10; j++){
-                System.out.print("#");
-            }
+        if (gefüllt.equals("ja")) {
             System.out.println();
+            for (int i = 0; i <= breite; i++) {
+                for (int j = 0; j <= laenge; j++) {
+                    System.out.print(symbol);
+                }
+                System.out.println();
+            }
+        } else {
+
 
         }
-/*  - gefüllt ja oder nein
-    - das Symbol auswählen können
-    - rahmenbreite wählen können
- */
+
+
     }
+
 }
+
