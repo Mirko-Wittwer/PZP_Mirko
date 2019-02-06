@@ -33,15 +33,13 @@ public class Main {
             System.out.println("Hast Du dran rumgefummelt? Ja oder Nein?");
         }
 
-        Scanner sc2 = new Scanner(System.in);
-        String rumgefummelt = sc2.next();
+        String rumgefummelt = sc.next();
 
         if(rumgefummelt.equals("ja")){
             System.out.println("Du Blödmann!");
             System.out.println("Weiß jemand davon? Ja oder nein?");
 
-            Scanner sc3 = new Scanner(System.in);
-            String bescheid = sc3.next();
+            String bescheid = sc.next();
             if(bescheid.equals("ja")){
                 System.out.println("Du armes Schwein!");
             }else{
@@ -51,14 +49,12 @@ public class Main {
         }else{
             System.out.println("Bist Du dafür verantwortlich? Ja oder Nein?");
 
-            Scanner sc4 = new Scanner(System.in);
-            String verantwortlich = sc4.next();
+            String verantwortlich = sc.next();
 
             if(verantwortlich.equals("ja")){
                 System.out.println("Kannst Du es jemand anderem anhängen? Ja oder Nein?");
 
-                Scanner sc5 = new Scanner(System.in);
-                String anhaengen = sc5.next();
+                String anhaengen = sc.next();
 
                 if(anhaengen.equals("nein")){
                     System.out.println("Du armes Schwein!");
