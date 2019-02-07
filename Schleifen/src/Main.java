@@ -7,24 +7,20 @@ public class Main {
         // Scanner einbinden
         // Zwei Zahlen einlesen als laenge und breite abspeichern
 
-
-        /*Scanner sc = new Scanner(System.in);
-
+        /*
+        Scanner sc = new Scanner(System.in);
         System.out.println("Geben Sie die Laenge ein: ");
         int laenge = sc.nextInt();
-
         System.out.println("Geben Sie die Breite ein: ");
         int breite = sc.nextInt();
-
-        System.out.println("Länge: " + laenge + " Breite: " + breite");*/
-
+        System.out.println("Länge: " + laenge + " Breite: " + breite");
 
         // Schleifen - For Schleife
         // Schleifenkopf:   1. Teil: Zählervariable und Startwert
         //                  2. Teil: Grenze (Möglich sind hier allle Operatoren <, <=, >, >=; ==, !=)
         //                  3. Teil: Anweisung nach einem Durchlauf
 
-        /*  - gefüllt ja oder nein
+        - gefüllt ja oder nein
         - das Symbol auswählen können
         - rahmenbreite wählen können
         */
@@ -32,18 +28,19 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Geben Sie die Laenge ein: ");
-        int laenge = sc.nextInt();
-
-        System.out.println("Also die Laenge lautet " + laenge + ". Gebe Sie die Breite ein: ");
+        System.out.println("Geben Sie die Breite ein.");
         int breite = sc.nextInt();
-        System.out.println("Die Breite lautet " + breite + ". Soll die Figur gefüllt sein? Ja oder Nein?");
-        String gefüllt = sc.next();
+
+        System.out.println("Also die Breite lautet " + breite + ". Gebe Sie die Laenge ein.");
+        int laenge = sc.nextInt();
+        System.out.println("Die Laenge lautet " + laenge + ". Soll die Figur ausgefüllt werden? Ja oder Nein?");
+        String gefuellt = sc.next();
 
 
         // Gefülltes Rechteck
-        if (gefüllt.equals("ja")) {
-            System.out.println(" ");
+        if (gefuellt.equals("ja")) {
+            System.out.println("Ok, die Figur wurd ausgefüllt.");
+            System.out.println();
 
         } else {
             System.out.println("Figur wird nicht gefüllt.");
@@ -53,13 +50,14 @@ public class Main {
         System.out.println("Mit welchem Symbol soll die Figur erstellt werden?");
         String symbol = sc.next();
         System.out.println("Ok, die Figur wird mit folgendem Symbol erstellt: " + symbol);
+        System.out.println();
 
-        if (gefüllt.equals("ja")) {
+        if (gefuellt.equals("ja")) {
 
             // Gefülltes Rechteck
             System.out.println();
-            for (int i = 0; i < breite; i++) {
-                for (int j = 0; j < laenge; j++) {
+            for (int a = 0; a < laenge; a++) {
+                for (int b = 0; b < breite; b++) {
                     System.out.print(symbol);
                 }
                 System.out.println();
@@ -67,48 +65,48 @@ public class Main {
             }
         } else {
 
+            System.out.println("Geben Sie den Rahmen an.");
+            int rahmen = sc.nextInt();
             // Ungefülltes Rechteck
             // Erste Zeile
-            System.out.println("Geben Sie die Rahmenstärke an: ");
-            int rahmen = sc.nextInt();
-            for (int a = 0; a < rahmen; a++) {
-                for (int b = 1; b <= breite; b++) {
+            for (int b = 0; b < rahmen; b++) {
+                for (int c = 0; c < breite; c++) {
                     System.out.print(symbol);
                 }
                 System.out.println();
             }
 
-            // 2. - vorletzte Zeile
-            for (int c = 1; c <= breite - rahmen * 2; c++) {
-                // Rahmen Teil 1
-                for (int g = 0; g <= rahmen; g++) {
-                    System.out.println(symbol);
+            // Rahmen 1. Teil
+            for (int d = 0; d < laenge - rahmen * 2; d++) {
+                for (int e = 0; e < rahmen; e++) {
+                    System.out.print(symbol);
                 }
                 // Aussparung
-                for (int d = 1; d <= laenge - rahmen * 2; d++) {
-                    System.out.println(" ");
+                for (int f = 0; f < breite - rahmen * 2; f++) {
+                    System.out.print(" ");
                 }
-                // Rahmen Teil 2
-                for (int h = 1; h <= rahmen; h++) {
-                    System.out.println(symbol);
+
+                for (int g = 0; g < rahmen; g++) {
+                    System.out.print(symbol);
                 }
-                // Zeilenumbruch Ende der Zeile
+
                 System.out.println();
+
             }
 
             // Letzte Zeile
-            for (int e = 0; e <= rahmen; e++) {
-                for (int f = 1; f <= laenge - 2; f++) {
+            for (int z = 0; z < rahmen; z++) {
+                for (int y = 0; y < breite; y++) {
                     System.out.print(symbol);
                 }
+                System.out.println();
             }
-            // Ende der Zeile
-            System.out.println();
 
         }
 
 
     }
+
 
 }
 
