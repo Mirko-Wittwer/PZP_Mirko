@@ -2,42 +2,54 @@ import java.util.Scanner;
 
 public class Main {
 
+    // Länge und Breite deklarieren
+    static int laenge;
+    static int breite;
+    static Scanner sc = new Scanner(System.in);
+    static String gefuellt;
+    static String symbol;
+
     public static void main(String[] args) {
 
-        // Scanner einbinden
-        // Zwei Zahlen einlesen als laenge und breite abspeichern
-
         /*
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Geben Sie die Laenge ein: ");
-        int laenge = sc.nextInt();
-        System.out.println("Geben Sie die Breite ein: ");
-        int breite = sc.nextInt();
-        System.out.println("Länge: " + laenge + " Breite: " + breite");
-
-        // Schleifen - For Schleife
-        // Schleifenkopf:   1. Teil: Zählervariable und Startwert
-        //                  2. Teil: Grenze (Möglich sind hier allle Operatoren <, <=, >, >=; ==, !=)
-        //                  3. Teil: Anweisung nach einem Durchlauf
-
+        Schleifen - For Schleife
+        Schleifenkopf:      1. Teil: Zählervariable und Startwert
+                            2. Teil: Grenze (Möglich sind hier allle Operatoren <, <=, >, >=; ==, !=)
+                            3. Teil: Anweisung nach einem Durchlauf
+        Scanner einbinden
+        Zwei Zahlen einlesen als laenge und breite abspeichern
         - gefüllt ja oder nein
         - das Symbol auswählen können
         - rahmenbreite wählen können
         */
 
+        willkommen();
+        leseLaengeBreite();
+        abfrageFuellung();
+        zeichnenRechteck();
+        beende();
 
+    }
+
+    static void willkommen(){
+        System.out.println("Geometrie Zeichner V1.0");
+    }
+
+    static void leseLaengeBreite(){
+        // 1. Länge und Breite einlesen
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Geben Sie die Breite ein.");
-        int breite = sc.nextInt();
+        breite = sc.nextInt();
 
         System.out.println("Also die Breite lautet " + breite + ". Gebe Sie die Laenge ein.");
-        int laenge = sc.nextInt();
+        laenge = sc.nextInt();
         System.out.println("Die Laenge lautet " + laenge + ". Soll die Figur ausgefüllt werden? Ja oder Nein?");
-        String gefuellt = sc.next();
+        gefuellt = sc.next();
 
+    }
 
-        // Gefülltes Rechteck
+    static void abfrageFuellung(){
         if (gefuellt.equals("ja")) {
             System.out.println("Ok, die Figur wurd ausgefüllt.");
             System.out.println();
@@ -48,9 +60,19 @@ public class Main {
         }
 
         System.out.println("Mit welchem Symbol soll die Figur erstellt werden?");
-        String symbol = sc.next();
+        symbol = sc.next();
         System.out.println("Ok, die Figur wird mit folgendem Symbol erstellt: " + symbol);
         System.out.println();
+
+    }
+
+    static void zeichnenRechteck() {
+
+
+
+
+
+
 
         if (gefuellt.equals("ja")) {
 
@@ -67,7 +89,7 @@ public class Main {
 
             System.out.println("Geben Sie den Rahmen an.");
             int rahmen = sc.nextInt();
-            // Ungefülltes Rechteck
+            // 3. Ungefülltes Rechteck
             // Erste Zeile
             for (int b = 0; b < rahmen; b++) {
                 for (int c = 0; c < breite; c++) {
@@ -107,6 +129,9 @@ public class Main {
 
     }
 
+    static void beende(){
+        System.out.println("Das Programm ist beendet.");
+    }
 
 }
 
