@@ -37,7 +37,6 @@ public class Main {
 
     static void leseLaengeBreite(){
         // 1. Länge und Breite einlesen
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Geben Sie die Breite ein.");
         breite = sc.nextInt();
