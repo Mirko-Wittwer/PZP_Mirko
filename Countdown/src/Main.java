@@ -33,9 +33,16 @@ public class Main {
 
     static void ausgabe() throws InterruptedException {
 
-        for (int a = 1; a <= countdown; a++){
+        // zur Wiederholung: Countup
+        /*for (int a = 1; a <= countdown; a++){
             System.out.println(a);
+            Thread.sleep(1000);*/
+
+        // Countdown
+        for(int b = countdown; b >= 0; b--){
+            System.out.print(b);
             Thread.sleep(1000);
+            System.out.print(" ");
 
         }
 
