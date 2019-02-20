@@ -4,7 +4,7 @@
 import java.util.Scanner;
 
 // Klasse TicTacToe dient uns als Hülle für unser Programm
-public class TicTacToe {
+public class TicTacToeZustandsautomat {
     // Golbale Variablen
     // Zweidimensionales Array mit dem namen Feld: Speichert unser Spielfeld ab
     static int[][] feld = new int[3][3];
@@ -14,9 +14,58 @@ public class TicTacToe {
     static boolean freiesFeld = true;
     // aktSpieler wechselt zwischen 1 und -1
     static int aktSpieler = 1;
+    // Zustandvariable
+    static int zustand = 0;
+    // Spielernamen
+    static String nameSpieler1;
+    static String nameSpieler2;
 
     // Einstiegspunkt unseres Programms: Wenn wir das Programm ausführen, wird hier begonnen
     public static void main(String[] args) {
+        // Zustandsautomat
+        while(zustand < 10) {
+            switch(zustand) {
+                // BootUp
+                case 0:
+                    bootUp();
+                    zustand = 1;
+                    break;
+                // Spielernamen einlesen
+                case 1:
+                    leseSpielernamen();
+                    zustand = 2;
+                    break;
+                // Koordinaten einlesen
+                case 2:
+                    gebeFeld();
+                    leseKoordinaten(aktSpieler);
+                    break;
+                // Prüfungen ausführen
+                case 3:
+                    pruefeFeld();
+                    pruefeGewonnen();
+                    break;
+                // Spieler 1 gewinnt
+                case 4:
+                    System.out.println(nameSpieler1 + " hat gewonnen!");
+                    break;
+                // Spieler 2 gewinnt
+                case 5:
+                    System.out.println(nameSpieler2 + " hat gewonnen!");
+                    break;
+                // Unentschieden
+                case 6:
+                    break;
+                // Spiel wiederholen?
+                case 7:
+                    break;
+                // Spiel beenden
+                case 8:
+                    break;
+            }
+        }
+
+
         // Spielfeld mit 0 füllen
         initFeld();
 
@@ -37,24 +86,7 @@ public class TicTacToe {
             //System.out.print(((aktSpieler == 1) ? "1" : "2" ));
             System.out.println(" ist am Zug!"); */
 
-            // Benutzereingaben einlesen: An welche Position soll der Stein?
-            System.out.print("X: ");
-            int posX = derScanner.nextInt();
-            System.out.print("Y: ");
-            int posY = derScanner.nextInt();
 
-            // Spielstein setzen
-            // Da pruefeFeld(x,y) einen boolean zurückgibt,
-            // können wir die Methode direkt in der if-Abfrage aufrufen.
-            if(pruefeFeld(posX, posY)) {
-                // setzeStein trägt einen Wert in unserem Spielfeld ein.
-                setzeStein(posX, posY, aktSpieler);
-                // Nachdem ein Stein erfolgreich gesetzt wurde, wird der Spieler getauscht.
-                spielerWechseln();
-            }
-
-            // Spielfeld ausgeben
-            gebeFeld();
 
             // Prüfe, ob noch freie Felder vorhanden
             pruefeFeld();
@@ -62,6 +94,42 @@ public class TicTacToe {
             pruefeGewonnen();
         }
         System.out.println("Keine freien Felder vorhanden!");
+    }
+
+    // Begrüßung zu Beginn
+    static void bootUp() {
+        System.out.println("TicTacToe V1.0");
+    }
+
+    // Koordinaten einlesen
+    static void leseKoordinaten(int aktSpieler) {
+        // Ausgabe des aktuellen Spielers
+        System.out.println(((aktSpieler == 1) ? nameSpieler1 : nameSpieler2) + " ist an der Reihe!");
+        // Benutzereingaben einlesen: An welche Position soll der Stein?
+        System.out.print("X: ");
+        int posX = derScanner.nextInt();
+        System.out.print("Y: ");
+        int posY = derScanner.nextInt();
+
+        // Spielstein setzen
+        // Da pruefeFeld(x,y) einen boolean zurückgibt,
+        // können wir die Methode direkt in der if-Abfrage aufrufen.
+        if(pruefeFeld(posX, posY)) {
+            // setzeStein trägt einen Wert in unserem Spielfeld ein.
+            setzeStein(posX, posY, aktSpieler);
+            // Nachdem ein Stein erfolgreich gesetzt wurde, wird der Spieler getauscht.
+            spielerWechseln();
+            // Nach erfolgreichem Zug wollen wir in den nächsten Zustand
+            zustand = 3;
+        }
+    }
+    // Einlesen der Spielernamen
+    static void leseSpielernamen() {
+        System.out.println("Bitte Namen eingeben!");
+        System.out.print("Spieler 1: ");
+        nameSpieler1 = derScanner.nextLine();
+        System.out.print("Spieler 2: ");
+        nameSpieler2 = derScanner.nextLine();
     }
 
     // Einzelnes Feld prüfen
@@ -185,7 +253,7 @@ public class TicTacToe {
         pruefeDiagonalen();
     }
 
-    static int pruefeReihen() {
+    static void pruefeReihen() {
         int reihe = 0;
         // Äußerer Zähler: Zeilen
         // 0: Unterste Zeile
@@ -202,9 +270,9 @@ public class TicTacToe {
             }
             // Wenn reihe 3 oder -3 ergibt, haben wir einen Gewinner
             if (reihe == 3) {
-                System.out.println("X hat gewonnen!");
+                zustand = 4;
             } else if (reihe == -3) {
-                System.out.println("O hat gewonnen!");
+                zustand = 5;
             }
             // Wenn wir mit der Prüfung einer Reihe fertig sind, dürfen wir nicht vergessen
             // die Variable reihe wieder auf 0 zu setzen, da wir sonst Ergebnisse aus der einen Reihe
@@ -212,13 +280,10 @@ public class TicTacToe {
             reihe = 0;
         }
 
-
-
-
-        return 0;
+        zustand = 2;
     }
 
-    static int pruefeSpalten() {
+    static void pruefeSpalten() {
         int spalte = 0;
         // Äußerer Zähler: Reihen
         // 0: Linke Reihe
@@ -235,21 +300,20 @@ public class TicTacToe {
             }
             // Wenn reihe 3 oder -3 ergibt, haben wir einen Gewinner
             if (spalte == 3) {
-                System.out.println("X hat gewonnen!");
+                zustand = 4;
             } else if (spalte == -3) {
-                System.out.println("O hat gewonnen!");
+                zustand = 5;
             }
             // Wenn wir mit der Prüfung einer Spalte fertig sind, dürfen wir nicht vergessen
             // die Variable spalte wieder auf 0 zu setzen, da wir sonst Ergebnisse aus der einen Spalte
             // mit in die nächste addieren.
             spalte = 0;
         }
-        
-        
-        return 0;
+
+        zustand = 2;
     }
 
-    static int pruefeDiagonalen() {
+    static void pruefeDiagonalen() {
         // Diagonale links unten nach rechts oben
         int diagonale = 0;
         // Diagonlae links oben nach rechts unten
@@ -261,12 +325,11 @@ public class TicTacToe {
             diagonale2 += feld[d][2-d]; // diagonale2 = feld[0][2] + feld[1][1] + feld[2][0]
         }
         if (diagonale == 3 || diagonale2 == 3) {
-            System.out.println("X hat gewonnen!");
+            zustand = 4;
         } else if (diagonale == -3 || diagonale2 == -3) {
-            System.out.println("O hat gewonnen!");
+            zustand = 5;
         }
-
-        return 0;
+        zustand = 2;
     }
 }
 
