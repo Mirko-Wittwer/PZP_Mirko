@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Zustandautomat {
     public static void main(String[] args) {
         int zustand = 0;
@@ -6,14 +7,14 @@ public class Zustandautomat {
         double a = 0, b = 0;
         char operation = ' ';
 
-        while(zustand < 5) {
+        while (zustand < 10) {
             switch (zustand) {
-                    // BootUp: Programmversion ausgeben
+                // BootUp: Programmversion ausgeben
                 case 0:
                     System.out.println("Rechner V1.0");
                     zustand = 1;
                     break;
-                    // Eingaben einlesen
+                // Eingaben einlesen
                 case 1:
                     System.out.print("A: ");
                     a = derScanner.nextDouble();
@@ -21,14 +22,14 @@ public class Zustandautomat {
                     b = derScanner.nextDouble();
                     zustand = 2;
                     break;
-                    // Entscheiden, was gerechnet werden soll
+                // Entscheiden, was gerechnet werden soll
                 case 2:
                     derScanner.nextLine();
                     System.out.print("Operation [+,-,*,/,%]: ");
                     operation = derScanner.nextLine().charAt(0);
                     zustand = 3;
                     break;
-                    // Berechnung ausführen
+                // Berechnung ausführen
                 case 3:
                     switch (operation) {
                         case '+':
@@ -49,21 +50,23 @@ public class Zustandautomat {
                     }
                     zustand = 4;
                     break;
-                    // Frage ob nochmal oder beenden?
+                // Frage ob nochmal oder beenden?
                 case 4:
                     System.out.println("Nochmal? [1] für Ja, [0] für Nein");
-                    if(derScanner.nextInt() == 1) {
+                    if (derScanner.nextInt() == 1) {
                         zustand = 1;
-                    }
-                    else {
+                    } else {
                         zustand = 5;
                     }
-
-
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
             }
         }
     }
-
+    
     static double addiere(double a, double b) {
         return a + b;
     }
